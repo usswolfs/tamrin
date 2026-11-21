@@ -1,0 +1,8 @@
+<div class="form-grid">
+<div><label>نام و نام خانوادگی مسافر</label><input name="passenger_name" value="{{ old('passenger_name', $reservation->passenger_name ?? '') }}" required>@error('passenger_name')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>ایمیل مسافر (اختیاری)</label><input type="email" name="passenger_email" value="{{ old('passenger_email', $reservation->passenger_email ?? '') }}">@error('passenger_email')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>شماره صندلی</label><input name="seat_number" value="{{ old('seat_number', $reservation->seat_number ?? '') }}" placeholder="مثلاً 12A" required>@error('seat_number')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>پرواز</label><select name="flight_id" required><option value="">انتخاب پرواز</option>@foreach($flights as $flight)<option value="{{ $flight->id }}" @selected((string)old('flight_id', $reservation->flight_id ?? '')===(string)$flight->id)>{{ $flight->flight_number }} — {{ $flight->origin }} به {{ $flight->destination }}</option>@endforeach</select>@error('flight_id')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>وضعیت رزرو</label><select name="status">@foreach(['confirmed'=>'تأییدشده','pending'=>'در انتظار','cancelled'=>'لغوشده'] as $value=>$label)<option value="{{ $value }}" @selected(old('status', $reservation->status ?? 'confirmed')===$value)>{{ $label }}</option>@endforeach</select></div>
+</div>
+<div class="form-actions"><button class="btn" type="submit">ذخیره اطلاعات</button><a class="btn secondary" href="{{ route('reservations.index') }}">بازگشت</a></div>

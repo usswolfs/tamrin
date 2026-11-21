@@ -1,0 +1,6 @@
+<?php
+use Illuminate\Support\Facades\Route; use App\Http\Controllers\Api\AirlineApiController as Api;
+Route::get('/dashboard',[Api::class,'dashboard']);
+Route::get('/aircraft',[Api::class,'aircraftIndex']);Route::post('/aircraft',[Api::class,'aircraftStore']);Route::get('/aircraft/{aircraft}',[Api::class,'aircraftShow']);Route::put('/aircraft/{aircraft}',[Api::class,'aircraftUpdate']);Route::patch('/aircraft/{aircraft}',[Api::class,'aircraftUpdate']);Route::delete('/aircraft/{aircraft}',[Api::class,'aircraftDelete']);
+Route::get('/flights',[Api::class,'flightIndex']);Route::post('/flights',[Api::class,'flightStore']);Route::get('/flights/{flight}',[Api::class,'flightShow']);Route::put('/flights/{flight}',[Api::class,'flightUpdate']);Route::patch('/flights/{flight}',[Api::class,'flightUpdate']);Route::delete('/flights/{flight}',[Api::class,'flightDelete']);
+Route::get('/reservations',[Api::class,'reservationIndex']);Route::post('/reservations',[Api::class,'reservationStore']);Route::get('/reservations/{reservation}',[Api::class,'reservationShow']);Route::put('/reservations/{reservation}',[Api::class,'reservationUpdate']);Route::patch('/reservations/{reservation}',[Api::class,'reservationUpdate']);Route::delete('/reservations/{reservation}',[Api::class,'reservationDelete']);

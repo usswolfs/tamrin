@@ -1,0 +1,10 @@
+<div class="form-grid">
+<div><label>شماره پرواز</label><input name="flight_number" value="{{ old('flight_number', $flight->flight_number ?? '') }}" required>@error('flight_number')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>مبدأ</label><input name="origin" value="{{ old('origin', $flight->origin ?? '') }}" required>@error('origin')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>مقصد</label><input name="destination" value="{{ old('destination', $flight->destination ?? '') }}" required>@error('destination')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>هواپیما</label><select name="aircraft_id" required><option value="">انتخاب هواپیما</option>@foreach($aircraft as $plane)<option value="{{ $plane->id }}" @selected((string)old('aircraft_id', $flight->aircraft_id ?? '')===(string)$plane->id)>{{ $plane->registration_number }} — {{ $plane->model }}</option>@endforeach</select>@error('aircraft_id')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>زمان حرکت</label><input type="datetime-local" name="departure_at" value="{{ old('departure_at', isset($flight) ? $flight->departure_at->format('Y-m-d\TH:i') : '') }}" required>@error('departure_at')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>زمان رسیدن</label><input type="datetime-local" name="arrival_at" value="{{ old('arrival_at', isset($flight) ? $flight->arrival_at->format('Y-m-d\TH:i') : '') }}" required>@error('arrival_at')<div class="field-error">{{ $message }}</div>@enderror</div>
+<div><label>وضعیت</label><select name="status">@foreach(['scheduled'=>'برنامه‌ریزی‌شده','in_progress'=>'در حال انجام','completed'=>'انجام‌شده','cancelled'=>'لغوشده'] as $value=>$label)<option value="{{ $value }}" @selected(old('status', $flight->status ?? 'scheduled')===$value)>{{ $label }}</option>@endforeach</select></div>
+</div>
+<div class="form-actions"><button class="btn" type="submit">ذخیره اطلاعات</button><a class="btn secondary" href="{{ route('flights.index') }}">بازگشت</a></div>

@@ -1,0 +1,3 @@
+<?php
+namespace App\Models; use Illuminate\Database\Eloquent\Model; use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class Flight extends Model { protected $fillable=['flight_code','origin','destination','departure','arrival','aircraft_id','pilot_id','status']; protected $casts=['departure'=>'datetime','arrival'=>'datetime']; protected $appends=['duration_minutes']; public function aircraft():BelongsTo{return $this->belongsTo(Aircraft::class);} public function pilot():BelongsTo{return $this->belongsTo(Pilot::class);} public function getDurationMinutesAttribute():int{return max(0,$this->departure&&$this->arrival?$this->departure->diffInMinutes($this->arrival,false):0);} }
